@@ -1,0 +1,22 @@
+{
+  "name": "store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "./dist/bin/store.js",
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "chalk": "^4.1.0",
+    "commander": "^7.2.0",
+    "inquirer": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.41"
+  }
+}
