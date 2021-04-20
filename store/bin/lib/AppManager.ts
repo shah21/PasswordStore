@@ -2,6 +2,12 @@ import axios from '../axios/config';
 import chalk from "chalk";
 import endpoints from '../axios/endpoints';
 
+
+type AppType = {
+    app:string,
+    password:string
+}
+
 export default class AppManager{
     constructor(){}
     
@@ -43,6 +49,18 @@ export default class AppManager{
     static async deleteApp(appName:string){
         try {
             const res = await axios.delete(`${endpoints.deleteApp}/${appName}`);
+            if(res){
+                return res.data;
+            }
+        } catch (error) {
+            handleError(error);
+        }
+    }
+
+
+    static async updateApp(appName:string,values:AppType){
+        try {
+            const res = await axios.patch(`${endpoints.updateApp}/${appName}`,values);
             if(res){
                 return res.data;
             }

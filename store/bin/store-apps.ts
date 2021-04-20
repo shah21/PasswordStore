@@ -22,7 +22,16 @@ program
         '--app <name>',
         'Delete specific app'
     )
-    .action(cmd=> app.deleteApp(cmd));       
+    .action(cmd=> app.deleteApp(cmd));    
+    
+program
+    .command('update')
+    .description('Update specific app from Password Store')
+    .option(
+        '--app <name>',
+        'Update specific app'
+    )
+    .action(cmd=> app.updateApp(cmd));       
 
 
 program.parse(process.argv);       

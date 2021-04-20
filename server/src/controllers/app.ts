@@ -95,6 +95,7 @@ export const deleteApp = async (req:Request,res:Response,next:NextFunction)=>{
 
     try{
         const app = await App.findByApp(appName);
+        
         if(!app){
             const error = new HttpException('App not found');
             error.statusCode = 404;
@@ -126,8 +127,17 @@ export const updateApp = async (req:Request,res:Response,next:NextFunction)=>{
     const appName = req.params.appName;
     const newName = req.body.app;
     const password = req.body.password;
+    const errors = validationResult(req).array();
 
     try{
+        if(errors.length > 0){
+            const error = new HttpException("Invalid data");
+            error.message = errors[0].msg;
+            error.statusCode = 422;
+            error.data = errors;
+            throw error;    
+        }
+
         const app = await App.findByApp(appName);
         if(!app){
             const error = new HttpException('App not found');
@@ -147,8 +157,10 @@ export const updateApp = async (req:Request,res:Response,next:NextFunction)=>{
         }
         
 
-        const updatedValue = await App.updateByName(appName,values);
-        res.status(200).json({messge:'Updated successfully!',user:updatedValue});
+        const updatedValues = await App.updateByName(appName,values);
+        const decryptPass = decrypt(updatedValues.value.password);
+        const newObj =  {...updatedValues.value,password:decryptPass};
+        res.status(200).json({message:'Updated successfully!',user:newObj});
     }catch(err){
          /* If no error code avaiable then assign 500 */
         if(!err.statusCode){

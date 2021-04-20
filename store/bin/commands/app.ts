@@ -77,5 +77,41 @@ export default {
         } catch (err) {
           console.log(chalk.red(err.message));
         }
-    }
+    },
+
+    async updateApp(cmd:any){
+      try {
+        if (!cmd || !cmd.app) {
+          console.log(`${chalk.red('Specify app name!')}  ${chalk.yellow('example \'store apps delete --app=fb\'')}`);
+          return;
+        }
+
+        const input = await inquirer.prompt([
+          {
+            type: 'input',
+            name: 'appName',
+            message: chalk.green('Enter New App name'),
+          },
+          {
+            type: 'input',
+            name: 'appPass',
+            message: chalk.green('Enter New App password'),
+          },
+      ]);
+
+        if (input.appName || input.appPass) {
+          const data = await AppManager.updateApp(cmd.app, {
+            app: input.appName ? input.appName : undefined!,
+            password: input.appPass ? input.appPass : undefined!,
+          });
+          if (data) {
+            console.log(chalk.yellow(data.message));
+          }
+        }else{
+          console.log(chalk.redBright('Please fill either one or more fields for updation!'));
+        }
+      } catch (err) {
+        console.log(chalk.red(err.message));
+      }
+  }
 }
