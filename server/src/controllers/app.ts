@@ -114,3 +114,48 @@ export const deleteApp = async (req:Request,res:Response,next:NextFunction)=>{
     }
 
 }
+
+interface PassType  {
+    iv: string,
+    content: string
+};
+
+
+/* Update Pass */
+export const updateApp = async (req:Request,res:Response,next:NextFunction)=>{
+    const appName = req.params.appName;
+    const newName = req.body.app;
+    const password = req.body.password;
+
+    try{
+        const app = await App.findByApp(appName);
+        if(!app){
+            const error = new HttpException('App not found');
+            error.statusCode = 404;
+            throw error;    
+        }
+
+        const values:{app?:string,password?:PassType}={};
+
+        /* Create values obj with changed values  */
+        if(typeof(newName) !== 'undefined'){
+            values.app = newName;
+        }
+        if(typeof(password) !== 'undefined'){
+            const hashedPass = await encrypt(password);
+            values['password'] = hashedPass;
+        }
+        
+
+        const updatedValue = await App.updateByName(appName,values);
+        res.status(200).json({messge:'Updated successfully!',user:updatedValue});
+    }catch(err){
+         /* If no error code avaiable then assign 500 */
+        if(!err.statusCode){
+            err.statusCode = 500;
+        }
+        //Pass to custom error handler
+        next(err);
+    }
+
+}

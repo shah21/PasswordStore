@@ -38,8 +38,8 @@ export default class Password{
         return getDb().collection('passwords').findOne({_id:new ObjectId(id)});
     }
 
-    static updateById(id:string,values:object){
-        return getDb().collection('passwords').findOneAndUpdate({_id:new ObjectId(id)},{$set:values},{returnOriginal:false});
+    static updateByName(name:string,values:object){
+        return getDb().collection('passwords').findOneAndUpdate({app:name},{$set:values},{returnOriginal:false});
     }
 
     static deleteByName(name:string){
