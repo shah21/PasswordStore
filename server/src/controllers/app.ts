@@ -18,7 +18,7 @@ export const getApps = async (req:Request,res:Response,next:NextFunction)=>{
             const decryptPass = decrypt(password.password);
             return {...password,password:decryptPass};
         })
-        res.status(201).json({messge:'Success',passwords:decryptedPasswords});
+        res.status(201).json({message:'Success',apps:decryptedPasswords});
     }catch(err){
          /* If no error code avaiable then assign 500 */
         if(!err.statusCode){
@@ -36,10 +36,15 @@ export const getApp = async (req:Request,res:Response,next:NextFunction)=>{
 
     try{
         /* Decrypt password */
-        const password = await App.findByApp(appName);
-        const decryptPass = decrypt(password.password);
-        const newObj =  {...password,password:decryptPass};
-        res.status(201).json({messge:'Success',password:newObj});
+        const app = await App.findByApp(appName);
+        if(!app){
+            const error = new HttpException('App not found');
+            error.statusCode = 404;
+            throw error;    
+        }
+        const decryptPass = decrypt(app.password);
+        const newObj =  {...app,password:decryptPass};
+        res.status(201).json({message:'Success',app:newObj});
     }catch(err){
          /* If no error code avaiable then assign 500 */
         if(!err.statusCode){
@@ -72,7 +77,7 @@ export const postCreatApp = async (req:Request,res:Response,next:NextFunction)=>
 
         /* Save user to db */
         await newPassword.save();
-        res.status(201).json({messge:'password stored successfully'});
+        res.status(201).json({message:'App added successfully'});
     }catch(err){
          /* If no error code avaiable then assign 500 */
         if(!err.statusCode){
@@ -92,13 +97,13 @@ export const deleteApp = async (req:Request,res:Response,next:NextFunction)=>{
         const app = await App.findByApp(appName);
         if(!app){
             const error = new HttpException('App not found');
-            error.statusCode = 402;
+            error.statusCode = 404;
             throw error;    
         }
 
         /* Delete app */
         await App.deleteByName(appName);
-        res.status(201).json({messge:'Deleted Successfully!'});
+        res.status(201).json({message:'Deleted Successfully!'});
     }catch(err){
          /* If no error code avaiable then assign 500 */
         if(!err.statusCode){
