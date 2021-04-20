@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/bfe140c7-b426-4025-9c06-b9815076f978/resourceGroups/semiurl/providers/Microsoft.Web/sites/passwordstore",
+    "appService.deploySubpath": "server"
+}
