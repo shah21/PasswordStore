@@ -10,6 +10,7 @@ const theme = {
     ...DefaultTheme.colors,
     background: 'white',
   },
+  
 };
 
 export default function App() {

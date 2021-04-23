@@ -13,11 +13,13 @@ interface PassType  {
 export default class Password{
     app:string;
     password:PassType;
-    signedAt:number;
+    addedAt:number;
+    updatedAt:number;
 
-    constructor(app:string,password:PassType,signedAt:number){
+    constructor(app:string,password:PassType,addedAt:number,updatedAt:number){
         this.password = password;
-        this.signedAt = signedAt;
+        this.addedAt = addedAt;
+        this.updatedAt = updatedAt;
         this.app = app;
     } 
 

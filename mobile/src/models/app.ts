@@ -3,12 +3,14 @@ export default class App{
     _id:string;
     app:string;
     password:string;
-    signedAt:number;
+    addedAt:number;
+    updatedAt:number;
 
-    constructor(_id:string,app:string,password:string,signedAt:number){
+    constructor(_id:string,app:string,password:string,addedAt:number,updatedAt:number){
         this._id = _id;
         this.password = password;
-        this.signedAt = signedAt;
+        this.addedAt = addedAt;
+        this.updatedAt = updatedAt;
         this.app = app;
     }     
 }

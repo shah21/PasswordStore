@@ -12,6 +12,8 @@ target 'mobile' do
     :hermes_enabled => false
   )
 
+  pod 'RNCClipboard', :path => '../node_modules/@react-native-community/clipboard'
+
   target 'mobileTests' do
     inherit! :complete
     # Pods for testing

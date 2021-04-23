@@ -73,7 +73,7 @@ export const postCreatApp = async (req:Request,res:Response,next:NextFunction)=>
         }
         /* Hash password */
         const hashedPass = await encrypt(password);
-        const newPassword = new App(appName,hashedPass,Date.now());
+        const newPassword = new App(appName,hashedPass,Date.now(),null!);
 
         /* Save user to db */
         await newPassword.save();
@@ -145,16 +145,17 @@ export const updateApp = async (req:Request,res:Response,next:NextFunction)=>{
             throw error;    
         }
 
-        const values:{app?:string,password?:PassType}={};
+        const values:{app?:string,password?:PassType,updatedAt?:number}={};
 
         /* Create values obj with changed values  */
-        if(typeof(newName) !== 'undefined'){
+        if(newName !== ''){
             values.app = newName;
         }
-        if(typeof(password) !== 'undefined'){
+        if(password !== null){
             const hashedPass = await encrypt(password);
             values['password'] = hashedPass;
         }
+        values['updatedAt'] = Date.now();
         
 
         const updatedValues = await App.updateByName(appName,values);
@@ -163,6 +164,7 @@ export const updateApp = async (req:Request,res:Response,next:NextFunction)=>{
         res.status(200).json({message:'Updated successfully!',user:newObj});
     }catch(err){
          /* If no error code avaiable then assign 500 */
+         console.log(err);
         if(!err.statusCode){
             err.statusCode = 500;
         }

@@ -7,6 +7,8 @@ const HomeStack = createStackNavigator();
 
 export default ()=>(
     <HomeStack.Navigator>
-        <HomeStack.Screen name="Password Store" component={Home}/>
+        <HomeStack.Screen name="Password Store"
+            
+            component={Home}/>
     </HomeStack.Navigator>
 );

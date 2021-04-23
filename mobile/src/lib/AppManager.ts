@@ -10,9 +10,9 @@ type AppType = {
 export default class AppManager{
     constructor(){}
     
-    static async addApp(appName:string,appPass:string){
+    static async addApp(app:AppProps){
         try {
-            const res = await axios.post(endpoints.createApp,{app:appName,password:appPass});
+            const res = await axios.post(endpoints.createApp,app);
             if(res){
                 return res.data;
             }
@@ -72,13 +72,16 @@ export default class AppManager{
 }
 
 function handleError(err:any){
-    if(err.response.status === 401){
+    if(err.message === "Network Error"){
+        throw new Error('Network Error');
+    }else if(err.response.status === 401){
         throw new Error('Unauthorized access');
     }else if(err.response.status === 404){
         throw new Error(err.response.data.message);
     }else if(err.response.status === 422){
         throw new Error(err.response.data.message);
     }else{
+        console.log(err.message);
         throw new Error('Something went wrong!');
     }
 }

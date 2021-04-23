@@ -21,7 +21,7 @@ router.patch('/update/:appName',[
         if (app) {
             return Promise.reject("App already exists!");
         }
-    }),
+    }).trim(),
 ],updateApp);
 
 router.post('/create-app',[
@@ -32,7 +32,7 @@ router.post('/create-app',[
         if (app) {
             return Promise.reject("App already exists!");
         }
-    }),
+    }).trim(),
 ],postCreatApp);
 
 export default router;
