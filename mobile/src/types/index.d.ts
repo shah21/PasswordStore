@@ -9,6 +9,21 @@ type AppProps = {
 type StackProps = {
     SignUpScreen:undefined,
     LoginScreen:undefined,
-    RootStackScreen:undefined,
+    RootStack:undefined,
     HomeScreen:undefined,
+    HomeStack:undefined,
 }
+
+
+type AuthObjectType = {
+    accessToken:string,
+    refreshToken:string,
+    userId:string,
+}
+
+
+interface UserToken{
+    accessToken:string,
+    refreshToken:string,
+    userId:string,
+  }

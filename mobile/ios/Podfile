@@ -14,6 +14,8 @@ target 'mobile' do
 
   pod 'RNCClipboard', :path => '../node_modules/@react-native-community/clipboard'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
+
   target 'mobileTests' do
     inherit! :complete
     # Pods for testing

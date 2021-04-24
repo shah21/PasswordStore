@@ -11,6 +11,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Theme from "../res/styles/theme.style";
 import Clipboard from '@react-native-community/clipboard';
 import { Colors } from 'react-native-paper'
+import { showToast } from '../utils/general'
+import AuthContext from '../contexts/AuthContext'
 
 type SplashNavigationProps = StackNavigationProp<
     StackProps,
@@ -21,9 +23,7 @@ type TypeProps = {
     navigation: SplashNavigationProps,
 }
 
-const showToast = (msg:string) => {
-    ToastAndroid.show(msg, ToastAndroid.SHORT);
-};
+
 
 export default function Home({navigation}:TypeProps) {
     const [apps,setApps] = useState<App[]>([]);
@@ -32,21 +32,52 @@ export default function Home({navigation}:TypeProps) {
     const sheetRef = React.useRef<RBSheet>(null);
     const addSheetRef = React.useRef<RBSheet>(null);
     const [currentApp,setApp] = React.useState<App>(null!);
+    const {signOut,token} = React.useContext(AuthContext); 
 
 
     const updateStatusBar = () => {
         navigation.setOptions({
-            headerRight:()=>(
-                <TouchableOpacity>
+          headerRight: () => (
+            <View style={styles.headerIcons}>
+              <TouchableOpacity>
                 <MaterialIcons
-                    onPress={()=>addSheetRef.current?.open()}
-                    style={{padding:10}} 
-                    name="add"
-                    color={Theme.BLACK}
-                    size={25}/>
-                </TouchableOpacity>    
-            )
-        })
+                  onPress={() => addSheetRef.current?.open()}
+                  style={{padding: 10}}
+                  name="add-box"
+                  color={Colors.blue500}
+                  size={25}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity>
+                <MaterialIcons
+                  onPress={handleLogout}
+                  style={{padding: 10}}
+                  name="logout"
+                  color={Theme.BLACK}
+                  size={25}
+                />
+              </TouchableOpacity>
+            </View>
+          ),
+        });
+    }
+
+
+
+    const handleLogout = () => {
+      Alert.alert('Logout','Are you sure, Do you really want to logout ?',[
+        {
+          text:'Cancel',
+          style:'cancel',
+        },
+        {
+          text:'Logout',
+          onPress:async()=>{
+            signOut();
+          }
+        },
+      ])
     }
 
 
@@ -55,7 +86,7 @@ export default function Home({navigation}:TypeProps) {
     const getApps =async()=>{
         setRefreshing(true);
         try{
-            const appsArray = await AppManager.getApps() as App[];
+            const appsArray = await AppManager.getApps(token) as App[];
             appsArray.length == 0 ? setShowEmptyMsg(true) : setShowEmptyMsg(false);
             setApps(appsArray);
         }catch(err){
@@ -77,7 +108,7 @@ export default function Home({navigation}:TypeProps) {
     
     const handleAdd = async (app:string,values:AppProps) => {
         if(values.app   && values.password){
-            const res = await AppManager.addApp(values);
+            const res = await AppManager.addApp(values,token);
             if(res){
                 showToast('App added');
                 addSheetRef.current?.close();
@@ -91,7 +122,7 @@ export default function Home({navigation}:TypeProps) {
     const handleEdit = async (name:string,values:AppProps) => {
         if(values.app   || values.password){
             try {
-              const res = await AppManager.updateApp(name, values);
+              const res = await AppManager.updateApp(name, values,token);
               if (res) {
                 showToast('App updated');
                 sheetRef.current?.close();
@@ -115,7 +146,7 @@ export default function Home({navigation}:TypeProps) {
             text: 'Delete',
             onPress: async () => {
               try {
-                const res = await AppManager.deleteApp(name);
+                const res = await AppManager.deleteApp(name,token);
                 if (res) {
                   showToast('App deleted');
                   setApps(prev => {
@@ -216,5 +247,8 @@ const styles = StyleSheet.create({
         marginTop:10,
         color:Colors.blue600,
         textDecorationLine:'underline',
+    },
+    headerIcons:{
+      flexDirection:'row',
     }
 });

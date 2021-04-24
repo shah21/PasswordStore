@@ -4,7 +4,7 @@ import { Card, IconButton } from 'react-native-paper'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import App from '../models/app'
 import Theme from '../res/styles/theme.style';
-import Clipboard from '@react-native-community/clipboard';
+
 
 type TypeProps = {
     item:App,

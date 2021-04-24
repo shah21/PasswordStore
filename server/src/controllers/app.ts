@@ -151,7 +151,8 @@ export const updateApp = async (req:Request,res:Response,next:NextFunction)=>{
         if(newName !== ''){
             values.app = newName;
         }
-        if(password !== null){
+
+        if(password){
             const hashedPass = await encrypt(password);
             values['password'] = hashedPass;
         }

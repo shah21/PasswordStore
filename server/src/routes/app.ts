@@ -4,17 +4,18 @@ import { Router } from 'express';
 import { body } from "express-validator";
 
 import { postCreatApp,getApps,getApp,deleteApp, updateApp } from '../controllers/app';
+import isAuth from '../middlewares/is-auth';
 import App from '../models/app';
 
 const router = Router();
 
-router.get('/',getApps);
+router.get('/',isAuth,getApps);
 
-router.get('/:appName',getApp);
+router.get('/:appName',isAuth,getApp);
 
-router.delete('/delete/:appName',deleteApp);
+router.delete('/delete/:appName',isAuth,deleteApp);
 
-router.patch('/update/:appName',[
+router.patch('/update/:appName',isAuth,[
     body('app').custom(async (value,{req})=>{
         /* Check app is already existed or not */
         const app = await App.findByApp(value);
@@ -24,7 +25,7 @@ router.patch('/update/:appName',[
     }).trim(),
 ],updateApp);
 
-router.post('/create-app',[
+router.post('/create-app',isAuth,[
     body('password').not().isEmpty().withMessage('Password is empty'),
     body('app').not().isEmpty().withMessage('Appname is empty').custom(async (value,{req})=>{
         /* Check app is already existed or not */

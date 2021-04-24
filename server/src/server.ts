@@ -6,6 +6,7 @@ import 'dotenv/config'
 import HttpException from "./utils/HttpException";
 import { connectDb } from "./helpers/database";
 import appRouter from "./routes/app";
+import authRouter from "./routes/auth";
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.use((req,res,next)=>{
 
 /* Routes */
 app.use('/api/apps',appRouter);
-// app.use('/user',userRouter);
+app.use('/api/auth',authRouter);
 
 
 /* Error handler middleware */
