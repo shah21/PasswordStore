@@ -8,6 +8,7 @@ import axios from "../axios/config";
 import endpoints from '../axios/endpoints';
 import InputField from '../components/InputField';
 import AuthContext from '../contexts/AuthContext';
+import * as Progress from "react-native-progress";
 import { showToast } from '../utils/general';
 import AuthStyles from './AuthStyles';
 
@@ -194,6 +195,15 @@ export default function SignupScreen({navigation}:TypeProps) {
           icon="lock"
           errorText={errors.confirm_password}
         />
+
+        {loading && (
+          <Progress.Circle
+            size={30}
+            borderWidth={5}
+            borderColor={Colors.blue700}
+            indeterminate={true}
+          />
+        )}
 
         <Button
           onPress={signupHandler}

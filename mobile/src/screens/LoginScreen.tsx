@@ -10,6 +10,7 @@ import InputField from '../components/InputField';
 import AuthContext from '../contexts/AuthContext';
 import { showToast } from '../utils/general';
 import AuthStyles from './AuthStyles';
+import * as Progress from "react-native-progress";
 
 const themeLogin={ 
     colors: { 
@@ -170,6 +171,15 @@ export default function LoginScreen({navigation}:TypeProps) {
           icon="lock"
           errorText={errors.password}
         />
+
+        {loading && (
+          <Progress.Circle
+            size={30}
+            borderWidth={5}
+            borderColor={Colors.blue700}
+            indeterminate={true}
+          />
+        )}
 
         <Button
           onPress={loginHandler}

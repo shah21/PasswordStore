@@ -4,6 +4,7 @@ import AppManager from "../lib/AppManager";
 import { isRequired } from "../utils/validation";
 import Table from 'cli-table';
 
+const appManager = new AppManager();
 
 export default {
     async add(){
@@ -24,7 +25,7 @@ export default {
             },
         ]);
         
-        const res = await AppManager.addApp(input.appName,input.appPass);
+        const res = await appManager.addApp({app:input.appName,password:input.appPass});
         if(res){
             console.log(chalk.yellow(res.message));
         }
@@ -38,14 +39,14 @@ export default {
         try {
             let apps = [];
             if(cmd && cmd.app){
-                const data = await AppManager.getApp(cmd.app);
+                const data = await appManager.getApp(cmd.app);
                 if(data){
                     apps.push(data.app)
                 }
             }else{
-                const data = await AppManager.getApps();
-                if (data) {
-                    apps = data.apps;
+                const resApps = await appManager.getApps();
+                if (resApps) {
+                    apps = resApps;
                 }
             }  
 
@@ -70,7 +71,7 @@ export default {
             console.log(`${chalk.red('Specify app name!')}  ${chalk.yellow('example \'store apps delete --app=fb\'')}`);
             return;
           }
-          const data = await AppManager.deleteApp(cmd.app);
+          const data = await appManager.deleteApp(cmd.app);
           if (data) {
             console.log(chalk.yellow(data.message));
           }
@@ -100,7 +101,7 @@ export default {
       ]);
 
         if (input.appName || input.appPass) {
-          const data = await AppManager.updateApp(cmd.app, {
+          const data = await appManager.updateApp(cmd.app, {
             app: input.appName ? input.appName : undefined!,
             password: input.appPass ? input.appPass : undefined!,
           });

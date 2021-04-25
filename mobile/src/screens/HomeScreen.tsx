@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { View, Text, Button,ToastAndroid, TouchableOpacity,Alert, RefreshControl, StyleSheet } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import SingleApp from '../components/SingleApp'
@@ -29,6 +29,7 @@ export default function Home({navigation}:TypeProps) {
     const [apps,setApps] = useState<App[]>([]);
     const [isRefreshing,setRefreshing] = useState<boolean>(false);
     const [showEmptyMsg,setShowEmptyMsg] = useState<boolean>(false);
+    const [showErrorMsg,setShowErrorMsg] = useState<boolean>(false);
     const sheetRef = React.useRef<RBSheet>(null);
     const addSheetRef = React.useRef<RBSheet>(null);
     const [currentApp,setApp] = React.useState<App>(null!);
@@ -85,19 +86,24 @@ export default function Home({navigation}:TypeProps) {
 
     const getApps =async()=>{
         setRefreshing(true);
+        setShowErrorMsg(false);
         try{
             const appsArray = await AppManager.getApps(token) as App[];
             appsArray.length == 0 ? setShowEmptyMsg(true) : setShowEmptyMsg(false);
             setApps(appsArray);
         }catch(err){
             showToast(err.message);
+            setShowErrorMsg(true);
         }    
         setRefreshing(false);
     }
 
+    useLayoutEffect(() => {
+      updateStatusBar();
+    }, [])
+
     useEffect(()=>{
-        getApps();
-        updateStatusBar();
+      getApps();
     },[]);
 
 
@@ -163,7 +169,7 @@ export default function Home({navigation}:TypeProps) {
     };
 
 
-    
+  
     
     const handleCopy = (password:string) => {
         Clipboard.setString(password);
@@ -229,6 +235,14 @@ export default function Home({navigation}:TypeProps) {
                 <Text style={styles.actionText}>Create One</Text>
             </TouchableOpacity>
         </View>) }
+
+        {showErrorMsg && (<View style={styles.emptyContainer}>
+            <Text style={styles.text1}>Something went wrong</Text>
+            <TouchableOpacity onPress={()=>getApps()}>
+                <Text style={styles.actionText}>Reload</Text>
+            </TouchableOpacity>
+        </View>) }
+
       </View>
     );
 }

@@ -111,6 +111,7 @@ export default function App() {
             dispatch({ type: 'RETRIEVE_TOKEN', authObject:tokenObj });
           }
         }
+        
       
         RNBootSplash.hide();
       } catch (error) {

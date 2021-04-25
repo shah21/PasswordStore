@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/HomeScreen';
 
 // home stack navigator screens
-const HomeStack = createStackNavigator();
+const HomeStack = createStackNavigator();           
 
 export default ()=>(
     <HomeStack.Navigator>

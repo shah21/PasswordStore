@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Button, Colors, TextInput } from 'react-native-paper';
+import { View, Text, StyleSheet, Button } from 'react-native'
+import { Colors, TextInput } from 'react-native-paper';
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 
@@ -130,12 +130,9 @@ export default function EditForm({item,handleEdit,type}:TypeProps) {
 
       <Button
         disabled={isDisabled}
-        mode="contained"
-        theme={theme}
-        style={styles.btn}
-        onPress={handleSave}>
-        Save
-      </Button>
+        title="Save"
+        color={Colors.black}
+        onPress={handleSave}/> 
     </View>
   );
 }
