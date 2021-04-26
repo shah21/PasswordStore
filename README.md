@@ -1,7 +1,7 @@
 ![][header]
 
 
- <h1>Password Store</h1>
+<h1 align="center">Password Store</h1>
 <p align="center">
   
    <img src="https://img.shields.io/badge/react%20native-0.64-blue"/>
