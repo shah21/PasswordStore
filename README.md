@@ -17,11 +17,11 @@ Now days we want powerfull passwords to secure our digital accounts. It is hard 
 ## Installation
 
 OS X & Linux & Windows (CLI): 
-
+* Download package
 ```sh
-git clone 
+git clone https://github.com/shah21/PasswordStore.git
 ```
-* User anywhere in terminal 
+* Install store cli
 ```sh
 cd store
 npm link
