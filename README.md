@@ -10,29 +10,31 @@
    <img src="https://img.shields.io/badge/mongodb-v4.4-brightgreen"/>
 </p>
  
-<p style="font-family:sans-serif;">
+<p>
 Now days we want powerfull passwords to secure our digital accounts. It is hard to memorize complex passwords for diffrent accounts.There is Password store comes in. Is is a platform that can help users to store passwords in encrypted way in their mobile phones and personal computers.Password store provide mobile application and CLI for PCs.
 </p>
 
 ## Installation
 
-OS X & Linux:
+OS X & Linux & Windows (CLI): 
 
 ```sh
-npm install my-crazy-module --save
+git clone 
 ```
-
-Windows:
-
+* User anywhere in terminal 
 ```sh
-edit autoexec.bat
+cd store
+npm link
 ```
 
 ## Usage example
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
+If you link package with global node modules then you call call it from anywhere.
 
-_For more examples and usage, please refer to the [Wiki][wiki]._
+
+```sh
+edit autoexec.bat
+```
 
 ## Development setup
 
