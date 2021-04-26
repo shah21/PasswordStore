@@ -1,8 +1,8 @@
 ![][header]
 
 <p align="center">
-   <a href="https://img.shields.io/badge/reactJs-%20v17.0.1-blue"></a>
-   <a href="https://img.shields.io/badge/node-javascript-green"></a>
+   <img src="https://img.shields.io/badge/reactJs-%20v17.0.1-blue"></img>
+   <img src="https://img.shields.io/badge/node-javascript-green"></img>
 </p>
  
 
