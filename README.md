@@ -1,8 +1,11 @@
 ![][header]
 
 <p align="center">
-   <img src="https://img.shields.io/badge/reactJs-%20v17.0.1-blue"/>
+   <h1>Password Store</h1>
+   <img src="https://img.shields.io/badge/react%20native-0.64-blue"/>
    <img src="https://img.shields.io/badge/node-javascript-green"/>
+   <img src="https://img.shields.io/badge/typescript-4.1.5-%236E97CC"/>
+   <img src="https://img.shields.io/badge/mongodb-v4.4-brightgreen"/>
 </p>
  
 
@@ -69,10 +72,5 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 5. Create a new Pull Request
 
 <!-- Markdown link & img dfn's -->
-[node-js]: https://img.shields.io/badge/node-javascript-green
-[npm-image]: https://img.shields.io/badge/node-v12.18.3-green
-[mongo-url]: https://img.shields.io/badge/mongodb-v4.4-brightgreen
-[react-url]: https://img.shields.io/badge/reactJs-%20v17.0.1-blue
-[types-url]: https://img.shields.io/badge/typescript-4.1.5-%236E97CC
 [mongo-conn]: https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
 [header]: screenshots/password_store_header.png
