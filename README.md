@@ -1,6 +1,3 @@
-# Password Store
-> Store and hash your password in your finger tips.
-
 ![react][react-url]
 ![typescript][types-url]
 ![node][npm-image]
