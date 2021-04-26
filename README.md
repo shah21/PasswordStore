@@ -1,7 +1,5 @@
 ![][header]
 
-# Password Store
-
 ![react][react-url]
 ![typescript][types-url]
 ![node][npm-image]
