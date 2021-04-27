@@ -3,6 +3,9 @@
 
 <h1 align="center">Password Store</h1>
 <p align="center">
+  <a href="https://drive.google.com/file/d/1QKkhXMxTC1_VxVSyzPyAXchAKHJ7J0Sl/view?usp=sharing">Download APK</a>
+</p>
+<p align="center">
   
    <img src="https://img.shields.io/badge/react%20native-0.64-blue"/>
    <img src="https://img.shields.io/badge/node-javascript-green"/>
