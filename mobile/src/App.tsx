@@ -71,6 +71,9 @@ export default function App() {
 
   const [token,setToken] = React.useState<UserToken>(null!);
   const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
+
+
+  
   
 
   const authContext = React.useMemo(()=>({
@@ -79,6 +82,13 @@ export default function App() {
         await AsyncStorage.setItem('accessToken',authObject.accessToken);
         await AsyncStorage.setItem('refreshToken',authObject.refreshToken);
         await AsyncStorage.setItem('userId',authObject.userId);
+
+        setToken({
+          accessToken:authObject.accessToken,
+          refreshToken:authObject.refreshToken,
+          userId:authObject.userId,
+        });
+
       } catch (error) {
         console.log(error);
       }
@@ -89,9 +99,17 @@ export default function App() {
         await AsyncStorage.removeItem('accessToken');
         await AsyncStorage.removeItem('refreshToken');
         await AsyncStorage.removeItem('userId');
+
+        setToken({
+          accessToken:null!,
+          refreshToken:null!,
+          userId:null!,
+        });
+
       } catch (error) {
         console.log(error);
       }
+      
       dispatch({type:'LOGOUT'});
     },
     signUp:()=>{}

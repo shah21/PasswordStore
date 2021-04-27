@@ -14,12 +14,14 @@ export default class Password{
     app:string;
     password:PassType;
     addedAt:number;
+    userId:ObjectId;
     updatedAt:number;
 
-    constructor(app:string,password:PassType,addedAt:number,updatedAt:number){
+    constructor(app:string,password:PassType,addedAt:number,updatedAt:number,userId:string){
         this.password = password;
         this.addedAt = addedAt;
         this.updatedAt = updatedAt;
+        this.userId = new ObjectId(userId);
         this.app = app;
     } 
 
@@ -27,12 +29,12 @@ export default class Password{
         return getDb().collection('passwords').insertOne(this);
     }
 
-    static getAll(){
-        return getDb().collection('passwords').find().toArray();
+    static getAll(uid:string){
+        return getDb().collection('passwords').find({userId:new ObjectId(uid)}).toArray();
     }
 
-    static findByApp(app:string){
-        return getDb().collection('passwords').findOne({app:app});
+    static findByApp(app:string,uid:string){
+        return getDb().collection('passwords').findOne({app:app,userId:new ObjectId(uid)});
     }
 
 

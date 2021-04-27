@@ -2,6 +2,7 @@ import axios from '../axios/config';
 import endpoints from '../axios/endpoints';
 import pkg from '../../package.json';
 import ConfigStore from 'configstore';
+import isAuth from '../utils/isAuth';
 
 export default class KeyManager{
     conf:ConfigStore;
@@ -22,6 +23,28 @@ export default class KeyManager{
             }
         } catch (error) {
             handleError(error);
+        }
+    }
+
+    async getUser(){
+        
+        try {
+          const isAuthourized = await isAuth(
+            this.conf.get("accessToken"),
+            this.conf.get("refreshToken")
+          );
+          if (isAuthourized && isAuthourized.isVerified) {
+            const res = await axios.get(endpoints.getUser, {
+              headers: {
+                Authorization: `Bearer ${isAuthourized.accessToken}`,
+              },
+            });
+            if (res) {
+              return res.data;
+            }
+          }
+        } catch (error) {
+          handleError(error);
         }
     }
 

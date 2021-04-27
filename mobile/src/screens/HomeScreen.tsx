@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { View, Text, Button,ToastAndroid, TouchableOpacity,Alert, RefreshControl, StyleSheet } from 'react-native'
+import { View, Text, Button,ToastAndroid, BackHandler, TouchableOpacity,Alert, RefreshControl, StyleSheet } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import SingleApp from '../components/SingleApp'
 import AppManager from '../lib/AppManager'
@@ -28,12 +28,14 @@ type TypeProps = {
 export default function Home({navigation}:TypeProps) {
     const [apps,setApps] = useState<App[]>([]);
     const [isRefreshing,setRefreshing] = useState<boolean>(false);
+    const [isSaving,setSaving] = useState<boolean>(false);
     const [showEmptyMsg,setShowEmptyMsg] = useState<boolean>(false);
     const [showErrorMsg,setShowErrorMsg] = useState<boolean>(false);
     const sheetRef = React.useRef<RBSheet>(null);
     const addSheetRef = React.useRef<RBSheet>(null);
     const [currentApp,setApp] = React.useState<App>(null!);
     const {signOut,token} = React.useContext(AuthContext); 
+    const [isUnmount,setUnmount] = useState<boolean>(false);
 
 
     const updateStatusBar = () => {
@@ -83,6 +85,13 @@ export default function Home({navigation}:TypeProps) {
 
 
 
+  const handleBackBtnClick = () => {
+    navigation.goBack();    
+    return true;
+  }
+
+
+
 
     const getApps =async()=>{
         setRefreshing(true);
@@ -103,7 +112,15 @@ export default function Home({navigation}:TypeProps) {
     }, [])
 
     useEffect(()=>{
-      getApps();
+      BackHandler.addEventListener('hardwareBackPress',handleBackBtnClick);
+      if(!isUnmount){
+        getApps();
+      }
+
+      return ()=>{
+        setUnmount(true);
+        BackHandler.removeEventListener('hardwareBackPress', handleBackBtnClick);
+      }
     },[]);
 
 
@@ -114,11 +131,18 @@ export default function Home({navigation}:TypeProps) {
     
     const handleAdd = async (app:string,values:AppProps) => {
         if(values.app   && values.password){
-            const res = await AppManager.addApp(values,token);
-            if(res){
+            setSaving(true);
+            try{
+              const res = await AppManager.addApp(values,token);
+              if(res){
                 showToast('App added');
                 addSheetRef.current?.close();
                 getApps();
+              }
+              setSaving(false);
+            }catch(err){
+              setSaving(false);
+              showToast(err.message);
             }
         }
     }
@@ -127,14 +151,19 @@ export default function Home({navigation}:TypeProps) {
 
     const handleEdit = async (name:string,values:AppProps) => {
         if(values.app   || values.password){
+          setSaving(true);
             try {
               const res = await AppManager.updateApp(name, values,token);
               if (res) {
                 showToast('App updated');
+                setSaving(false);
                 sheetRef.current?.close();
                 getApps();
               }
-            } catch (err) {}
+            } catch (err) {
+              showToast(err.message);
+              setSaving(false);
+            }
         }
     }
 
@@ -210,7 +239,7 @@ export default function Home({navigation}:TypeProps) {
               backgroundColor: '#000',
             },
           }}>
-          <EditForm type="edit" item={currentApp} handleEdit={handleEdit}/>
+          <EditForm  isSaving={isSaving} type="edit" item={currentApp} handleEdit={handleEdit}/>
         </RBSheet>
 
 
@@ -226,7 +255,7 @@ export default function Home({navigation}:TypeProps) {
               backgroundColor: '#000',
             },
           }}>
-          <EditForm type="add" item={{app:'',password:''}} handleEdit={handleAdd}/>
+          <EditForm isSaving={isSaving} type="add" item={{app:'',password:''}} handleEdit={handleAdd}/>
         </RBSheet>
         
         {showEmptyMsg && (<View style={styles.emptyContainer}>

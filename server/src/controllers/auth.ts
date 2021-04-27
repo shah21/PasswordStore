@@ -10,6 +10,33 @@ import { generateAccessToken, generateRefreshToken, verifyAccessToken, verifyRef
 import User from "../models/user";
 
 
+
+export const getUser = async (req:Request,res:Response,next:NextFunction)=>{
+    const userId:string = req.userId!;
+    try{
+        const user = await User.findById(userId);
+        if (!user) {
+          const error = new HttpException("User not found");
+          error.statusCode = 422;
+          throw error;
+        }
+
+        const userObj = {
+            _id:user._id,
+            email:user.email,
+            signedAt:user.signedAt,
+        }
+
+        res.status(200).json({messge:'success',user:userObj});
+    }catch(err){
+        if(!err.statusCode){
+            err.statusCode = 500;
+        }
+        next(err);
+    }
+};
+
+
 /* Login user */
 export const postLogin = async (req:Request,res:Response,next:NextFunction)=>{
     const email = req.body.email;

@@ -5,7 +5,7 @@ import endpoints from "../axios/endpoints";
 
 
 
-const isAuth = async (accessToken:string,refreshToken:string):Promise<{isVerified:boolean,accessToken:string}> =>{
+const isAuth = async (accessToken:string,refreshToken:string):Promise<{isVerified:boolean,accessToken:string}> =>{  
     const conf = new ConfigStore(pkg.name);
     try{
         const authResponse =  await axiosInstance.post(endpoints.verifyAccessToken,{accessToken:accessToken});

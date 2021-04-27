@@ -18,7 +18,8 @@ router.delete('/delete/:appName',isAuth,deleteApp);
 router.patch('/update/:appName',isAuth,[
     body('app').custom(async (value,{req})=>{
         /* Check app is already existed or not */
-        const app = await App.findByApp(value);
+        const userId = req.userId;
+        const app = await App.findByApp(value,userId);
         if (app) {
             return Promise.reject("App already exists!");
         }
@@ -29,7 +30,8 @@ router.post('/create-app',isAuth,[
     body('password').not().isEmpty().withMessage('Password is empty'),
     body('app').not().isEmpty().withMessage('Appname is empty').custom(async (value,{req})=>{
         /* Check app is already existed or not */
-        const app = await App.findByApp(value);
+        const userId = req.userId;
+        const app = await App.findByApp(value,userId);
         if (app) {
             return Promise.reject("App already exists!");
         }

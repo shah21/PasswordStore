@@ -107,6 +107,7 @@ export default class AppManager {
 }
 
 function handleError(err:any){
+    console.log(err);
     if(err.message === "Network Error"){
         throw new Error('Network Error');
     }else if(err.response.status === 401){

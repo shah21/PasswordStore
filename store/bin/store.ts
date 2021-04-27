@@ -8,5 +8,5 @@ import program from 'commander';
 program
     .version(pkg.version)
     .command('apps','Manage Apps and Passwords')
-    .command('login','Login to password store')
+    .command('user','Manage user and Login to password store')
     .parse(process.argv);

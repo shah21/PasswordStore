@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import { Colors, TextInput } from 'react-native-paper';
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import * as Progress from "react-native-progress";
 
 
 
@@ -16,6 +17,7 @@ type TypeProps = {
     item:AppProps,
     handleEdit:(name:string,values:AppProps)=>void,
     type:string,
+    isSaving:boolean,
 }
 
 
@@ -28,7 +30,7 @@ const formReducer = (state: object, event: any) => {
 
 
 
-export default function EditForm({item,handleEdit,type}:TypeProps) {
+export default function EditForm({item,handleEdit,type,isSaving}:TypeProps) {
   const [formData, setFormData] = React.useReducer(formReducer, {
       app:item.app,
       password:item.password
@@ -107,48 +109,84 @@ export default function EditForm({item,handleEdit,type}:TypeProps) {
 
   return (
     <View style={styles.container}>
-    
-    
       <TextInput
         mode="outlined"
         theme={theme}
         error={errors.app ? true : false}
         value={formData.app}
-        onChangeText={(text)=>handleTextChange(text.trim(),'app')}
+        onChangeText={text => handleTextChange(text.trim(), 'app')}
         label="App"
       />
-    
+
       <TextInput
         mode="outlined"
         theme={theme}
         error={errors.password ? true : false}
         value={formData.password}
-        onChangeText={(text)=>handleTextChange(text.trim(),'password')}
+        onChangeText={text => handleTextChange(text.trim(), 'password')}
         style={styles.input}
         label="Password"
       />
 
-      <Button
+      <TouchableOpacity
+        onPress={handleSave}
         disabled={isDisabled}
-        title="Save"
-        color={Colors.black}
-        onPress={handleSave}/> 
+        activeOpacity={0.6}
+        style={[
+          styles.signIn,
+          {
+            backgroundColor: Colors.black,
+            borderWidth: 1,
+            marginTop: 15,
+          },
+        ]}>
+        <Text
+          style={[
+            styles.textSign,
+            {
+              color: Colors.white,
+            },
+          ]}>
+          Save
+        </Text>
+        {isSaving && (
+            <Progress.Circle
+              size={20}
+              borderWidth={5}
+              borderColor="#fff"
+              indeterminate={true}
+            />
+          )}
+      </TouchableOpacity>
     </View>
   );
 }
 
 
 const styles = StyleSheet.create({
-    container:{
-        marginHorizontal:10,
-        marginVertical:5,
-    },
-    header:{
-        fontSize:20,
-        fontWeight:'700',
-    },
-    input:{
-        marginVertical:15,
-    },
-    btn:{}
+  container: {
+    marginHorizontal: 10,
+    marginVertical: 5,
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  input: {
+    marginVertical: 15,
+  },
+  btn: {},
+  signIn: {
+    width: '100%',
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  textSign: {
+    fontSize: 18,
+    paddingHorizontal: 5,
+    fontWeight: 'bold',
+  },
 });

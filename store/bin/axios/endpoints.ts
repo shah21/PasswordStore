@@ -2,7 +2,7 @@
 
 enum endpoints {
     login = '/api/auth/login',
-    signup = '/api/auth/signup',
+    getUser = '/api/auth/user',
     verifyAccessToken = '/api/auth/verifyAccessToken',
     refreshToken = '/api/auth/refresh-token',
 

@@ -13,7 +13,7 @@ export const getApps = async (req:Request,res:Response,next:NextFunction)=>{
 
     try{
         /* Decrypt passwords */
-        const passwords = await App.getAll();
+        const passwords = await App.getAll(req.userId!);
         const decryptedPasswords = passwords.map((password:App)=>{
             const decryptPass = decrypt(password.password);
             return {...password,password:decryptPass};
@@ -36,7 +36,7 @@ export const getApp = async (req:Request,res:Response,next:NextFunction)=>{
 
     try{
         /* Decrypt password */
-        const app = await App.findByApp(appName);
+        const app = await App.findByApp(appName,req.userId!);
         if(!app){
             const error = new HttpException('App not found');
             error.statusCode = 404;
@@ -73,7 +73,7 @@ export const postCreatApp = async (req:Request,res:Response,next:NextFunction)=>
         }
         /* Hash password */
         const hashedPass = await encrypt(password);
-        const newPassword = new App(appName,hashedPass,Date.now(),null!);
+        const newPassword = new App(appName,hashedPass,Date.now(),null!,req.userId!);
 
         /* Save user to db */
         await newPassword.save();
@@ -94,7 +94,7 @@ export const deleteApp = async (req:Request,res:Response,next:NextFunction)=>{
     const appName = req.params.appName;
 
     try{
-        const app = await App.findByApp(appName);
+        const app = await App.findByApp(appName,req.userId!);
         
         if(!app){
             const error = new HttpException('App not found');
@@ -138,7 +138,7 @@ export const updateApp = async (req:Request,res:Response,next:NextFunction)=>{
             throw error;    
         }
 
-        const app = await App.findByApp(appName);
+        const app = await App.findByApp(appName,req.userId!);
         if(!app){
             const error = new HttpException('App not found');
             error.statusCode = 404;
