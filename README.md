@@ -70,14 +70,13 @@ JWT_SECRET_KEY=
 JWT_REFRESH_KEY=
 CRYPTO_KEY=
 ```
-* For working with client projects . You have to change base url, if you need to <b>
-Go to src/axios/config replace your server address with host </b>
+* For working with client projects . You have to change base url, if you need to <br>
+Go to src/axios/config replace your server address with host 
 ```
 const BASE_URL = <host>;
 ```
 More guides 👇
 * Configure mongoDb database 📖 [Connect with mongoDb atlas][mongo-conn]
-  
   
 ## Issues and suggestions
 
