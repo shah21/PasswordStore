@@ -63,34 +63,39 @@ More guides 👇
 
 ## Release History
 
-* 0.2.1
-    * CHANGE: Update docs (module code remains unchanged)
-* 0.2.0
-    * CHANGE: Remove `setDefaultXYZ()`
-    * ADD: Add `init()`
-* 0.1.1
-    * FIX: Crash when calling `baz()` (Thanks @GenerousContributorName!)
-* 0.1.0
-    * The first proper release
-    * CHANGE: Rename `foo()` to `bar()`
 * 0.0.1
     * Work in progress
 
-## Meta
+<!-- CONTACT -->
+## Contact
 
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
+Muhsin Shah - [@shah21](https://twitter.com/MuhsinS07857838?s=09) - muhsinshah21@gmail.com
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+Project Link: [https://github.com/shah21/Data-Bucket.git](https://github.com/shah21/PasswordStore/i)
 
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+## Issues and suggestions
 
+See the [open issues](https://github.com/shah21/PasswordStore/issues) for a list of proposed features (and known issues).
+
+<!-- CONTRIBUTING -->
 ## Contributing
 
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+Password-Store is open to contributions, but I recommend creating an issue or replying in a comment to let me know what you are working on first that way we don't overwrite each other.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request 
+
+📖 [Learn more about open source contribution][opensource-docs]
+
+<!-- LICENSE -->
+## License
+
+Distributed under the Apache License 2.0 License. See `LICENSE` for more information.
 
 <!-- Markdown link & img dfn's -->
 [mongo-conn]: https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
