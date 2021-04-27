@@ -59,8 +59,8 @@ Go to src/axios/config replace your server address with host
 const BASE_URL = <host>;
 ```
 More guides 👇
-*. Configure aws and Get API keys 📖 [Working with s3 bucket][s3bucket-docs] , [Get aws credentials][awsCred-url]
-*. Configure mongoDb database 📖 [Connect with mongoDb atlas][mongo-conn]
+* Configure aws and Get API keys 📖 [Working with s3 bucket][s3bucket-docs] , [Get aws credentials][awsCred-url]
+* Configure mongoDb database 📖 [Connect with mongoDb atlas][mongo-conn]
 
 ## Release History
 
