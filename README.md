@@ -33,17 +33,34 @@ If you link package with global node modules then you call call it from anywhere
 
 
 ```sh
-edit autoexec.bat
+store -h
 ```
+above command gives you details about all features and options 
 
 ## Development setup
 
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
+* You can install all dependency using 
 ```sh
-make install
-npm test
+npm install
 ```
+* If you are working on server part.You need to configure environment variables.Create a .env file all fill all required varialbes with approprate values
+```
+MONGO_USER=
+MONGO_PASSWORD=
+MONGO_DEFAULT_DB=
+
+JWT_SECRET_KEY=
+JWT_REFRESH_KEY=
+CRYPTO_KEY=
+```
+* For working with client parts . You have to change base url if you need to 
+Go to src/axios/config replace your server address with host
+```
+const BASE_URL = <host>;
+```
+More guides 👇
+*. Configure aws and Get API keys 📖 [Working with s3 bucket][s3bucket-docs] , [Get aws credentials][awsCred-url]
+*. Configure mongoDb database 📖 [Connect with mongoDb atlas][mongo-conn]
 
 ## Release History
 
@@ -79,3 +96,8 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 <!-- Markdown link & img dfn's -->
 [mongo-conn]: https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
 [header]: screenshots/password_store_header.png
+
+[s3bucket-docs]: https://docs.aws.amazon.com/AmazonS3/latest/dev-retired/UsingBucket.html
+[awsCred-url]: https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html
+[mongo-conn]: https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
+[opensource-docs]: https://opensource.guide/how-to-contribute/
