@@ -60,19 +60,8 @@ const BASE_URL = <host>;
 ```
 More guides 👇
 * Configure mongoDb database 📖 [Connect with mongoDb atlas][mongo-conn]
-
-## Release History
-
-* 0.0.1
-    * Work in progress
-
-<!-- CONTACT -->
-## Contact
-
-Muhsin Shah - [@shah21](https://twitter.com/MuhsinS07857838?s=09) - muhsinshah21@gmail.com
-
-Project Link: [https://github.com/shah21/Data-Bucket.git](https://github.com/shah21/PasswordStore/i)
-
+  
+  
 ## Issues and suggestions
 
 See the [open issues](https://github.com/shah21/PasswordStore/issues) for a list of proposed features (and known issues).
@@ -91,6 +80,14 @@ Password-Store is open to contributions, but I recommend creating an issue or re
 5. Open a Pull Request 
 
 📖 [Learn more about open source contribution][opensource-docs]
+
+
+<!-- CONTACT -->
+## Contact
+
+Muhsin Shah - [@shah21](https://twitter.com/MuhsinS07857838?s=09) - muhsinshah21@gmail.com
+
+Project Link: [https://github.com/shah21/Data-Bucket.git](https://github.com/shah21/PasswordStore/i)
 
 <!-- LICENSE -->
 ## License
