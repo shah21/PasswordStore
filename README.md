@@ -11,7 +11,7 @@
 </p>
  
 <p>
-Now days we want powerfull passwords to secure our digital accounts. It is hard to memorize complex passwords for diffrent accounts.There is Password store comes in. Is is a platform that can help users to store passwords in encrypted way in their mobile phones and personal computers.Password store provide mobile application and CLI for PCs.
+Now days we want powerfull passwords to secure our digital accounts. It is hard to memorize complex passwords for diffrent accounts. There is Password store comes in. Is is a platform that can help users to store passwords in encrypted way in their mobile phones and personal computers. Password store provide mobile application and CLI for PCs.
 </p>
 
 ## Installation
