@@ -29,21 +29,38 @@ npm link
 
 ## Usage example
 
-If you link package with global node modules then you call call it from anywhere.
+If you link package with global node modules then you can call it from anywhere.
 
 
 ```sh
 store -h
 ```
-above command gives you details about all features and options 
+☝️ above command gives you details about all features and options 
 
 ## Development setup
 
-* You can install all dependency using 
+### Structure
+
+<table>
+  <tr>
+    <th>Platform</th> <th>Folder</th>  
+  </tr>
+  <tr>
+    <td>Mobile App</td><td>mobile</td>
+  </tr>
+   <tr>
+    <td>CLI</td><td>store</td>
+  </tr>
+   <tr>
+    <td>Rest Api</td><td>server</td>
+  </tr>
+<table>
+
+* You can install all dependencies using 
 ```sh
 npm install
 ```
-* If you are working on server part.You need to configure environment variables.Create a .env file all fill all required varialbes with approprate values
+* If you are working on server part.You need to configure environment variables. Create a .env file and fill all required varialbes with approprate values
 ```
 MONGO_USER=
 MONGO_PASSWORD=
@@ -53,7 +70,7 @@ JWT_SECRET_KEY=
 JWT_REFRESH_KEY=
 CRYPTO_KEY=
 ```
-* For working with client parts . You have to change base url if you need to 
+* For working with client projects . You have to change base url if you need to 
 Go to src/axios/config replace your server address with host
 ```
 const BASE_URL = <host>;
@@ -87,7 +104,7 @@ Password-Store is open to contributions, but I recommend creating an issue or re
 
 Muhsin Shah - [@shah21](https://twitter.com/MuhsinS07857838?s=09) - muhsinshah21@gmail.com
 
-Project Link: [https://github.com/shah21/Data-Bucket.git](https://github.com/shah21/PasswordStore/i)
+Project Link: [https://github.com/shah21/PasswordStore.git](https://github.com/shah21/PasswordStore/i)
 
 <!-- LICENSE -->
 ## License
