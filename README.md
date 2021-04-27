@@ -59,7 +59,6 @@ Go to src/axios/config replace your server address with host
 const BASE_URL = <host>;
 ```
 More guides 👇
-* Configure aws and Get API keys 📖 [Working with s3 bucket][s3bucket-docs] , [Get aws credentials][awsCred-url]
 * Configure mongoDb database 📖 [Connect with mongoDb atlas][mongo-conn]
 
 ## Release History
@@ -97,7 +96,5 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 [mongo-conn]: https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
 [header]: screenshots/password_store_header.png
 
-[s3bucket-docs]: https://docs.aws.amazon.com/AmazonS3/latest/dev-retired/UsingBucket.html
-[awsCred-url]: https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html
 [mongo-conn]: https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
 [opensource-docs]: https://opensource.guide/how-to-contribute/
