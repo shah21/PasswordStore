@@ -70,8 +70,8 @@ JWT_SECRET_KEY=
 JWT_REFRESH_KEY=
 CRYPTO_KEY=
 ```
-* For working with client projects . You have to change base url if you need to 
-Go to src/axios/config replace your server address with host
+* For working with client projects . You have to change base url, if you need to <b>
+Go to src/axios/config replace your server address with host </b>
 ```
 const BASE_URL = <host>;
 ```
